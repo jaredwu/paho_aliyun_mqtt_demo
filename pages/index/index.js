@@ -29,16 +29,6 @@ Page({
     //===============
     //================
 
-    // var topic = 'HAC-ADD_EVENT';//MQTT topic
-    // var tag = 'HAC-ADD_EVENT';//MQTT tag
-    // var accessKey = 'LTAICHZNM08qwsF1';//MQTT accessKey
-    // var username = accessKey;
-    // var secretKey = 'GcGKhlT34MsMD1FkbVlP8EtXDbi7mL';//MQTT  secretKey
-    // var groupid = 'GID-HAC-ADD_EVENT';
-    // var host = 'post-cn-45908degu01.mqtt.aliyuncs.com';
-    // var port = 80;
-    // var clientId = groupid + '@@@' + 'PID-HAC-ADD_EVENT';
-
     var topic = 'HHHHHH_TEST';//MQTT topic
     var accessKey = "xxxxxxxxxxxx";
     var username = accessKey;
