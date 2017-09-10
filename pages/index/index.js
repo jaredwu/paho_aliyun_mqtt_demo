@@ -2,7 +2,7 @@
 //获取应用实例
 var app = getApp()
 
-var Paho = require('../../utils/paho-mqtt-min.js')
+var Paho = require('../../utils/paho-mqtt.js')
 var Crypto = require('../../utils/cryptojs/cryptojs.js').Crypto;
 
 Page({
@@ -29,13 +29,22 @@ Page({
     //===============
     //================
 
-    var topic = 'HHHHHH_TEST';//MQTT topic
-    var accessKey = "xxxxxxxxxxxx";
+    // var topic = 'LEMONHALL_TEST';//MQTT topic
+    // var accessKey = "LTAIjhtH2OmNPgen";
+    // var username = accessKey;
+    // var secretKey = "xxxxxxxxxxxxxxxxxxx";
+    // var groupid = 'GID_LemonGroup';
+    // var host = 'mqtt.lemonhall.com';
+    // var port = 80;
+
+    var topic = 'LEMONHALL_TEST';//MQTT topic
+    var accessKey = "LTAIjhtH2OmNPgen";
     var username = accessKey;
-    var secretKey = "xxxxxxxxxxxxxxxxxxx";
-    var groupid = 'GID-HAC-ADD_EVENT111';
-    var host = 'xxxxxxxxxxx.mqtt.aliyuncs.com';
+    var secretKey = "5euxRgpGLlrAet1lGihkG2vyFb1cZA";
+    var groupid = 'GID_LemonGroup';
+    var host = 'post-cn-0pp093hfs0a.mqtt.aliyuncs.com';
     var port = 80;
+
     var clientId = groupid + '@@@' + 'PID-HAC-ADD_EVENT';
 
     var password = Crypto.util.bytesToBase64(Crypto.HMAC(Crypto.SHA1, groupid, secretKey, { asBytes: true }));
@@ -43,7 +52,7 @@ Page({
     var client = new Paho.Client(host,port, clientId);
 
     client.connect({
-      useSSL: false,
+      useSSL: true,
       userName : username,
       password : password,
       cleanSession: true,
@@ -51,6 +60,12 @@ Page({
       onSuccess: function () {
         console.log('connected');
         that.globalData.client = client
+
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        })
 
         client.onMessageArrived = function (msg) {
           if (typeof that.globalData.onMessageArrived === 'function') {
@@ -71,6 +86,13 @@ Page({
             console.log("onConnectionLost:" + responseObject.errorMessage);
           }
         }
+      },
+      onFailure: function (res) {
+        wx.showToast({
+          title: res.errorCode + " | " + res.errorMessage,
+          icon: 'success',
+          duration: 200000
+        })
       }
     });
     setTimeout(function(){
